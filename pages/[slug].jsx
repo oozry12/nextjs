@@ -20,3 +20,10 @@ export default ({ post, blocks }) => (
     <NotionRenderer blockMap={blocks} />
   </div>
 );
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  return {
+    paths: posts.map((row) => `/${row.slug}`),
+    fallback: true,
+  };
+}
